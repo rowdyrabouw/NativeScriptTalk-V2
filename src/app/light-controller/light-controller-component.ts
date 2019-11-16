@@ -13,7 +13,7 @@ export class LightControllerComponent implements OnInit {
     characteristicUUID: string = "ee03";
     deviceUUID: string = "";
 
-    constructor(private route: ActivatedRoute, private colorPicker: ColorPicker) {}
+    constructor(private route: ActivatedRoute) {}
 
     ngOnInit() {
         this.deviceUUID = this.route.snapshot.params["UUID"];
@@ -22,6 +22,33 @@ export class LightControllerComponent implements OnInit {
 
     showRainbow() {
         console.log("showRainbow");
+        this.loopColors(0);
+    }
+
+    loopColors(index) {
+        const colors = [
+            "#000000",
+            "#ff0000",
+            "#ff8000",
+            "#ffff00",
+            "#80ff00",
+            "#00ff00",
+            "#00ff80",
+            "#00ffff",
+            "#0080ff",
+            "#0000ff",
+            "#8000ff",
+            "#ff0080"
+        ];
+
+        if (index < colors.length) {
+            setTimeout(() => {
+                console.log(colors[index]);
+                this.writeColor(colors[index]);
+                index++;
+                this.loopColors(index);
+            }, 750);
+        }
     }
 
     writeColor(color) {
