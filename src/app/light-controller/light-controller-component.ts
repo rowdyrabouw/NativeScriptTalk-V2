@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import * as bluetooth from "nativescript-bluetooth";
 import { ActivatedRoute } from "@angular/router";
+import { SpeechRecognition, SpeechRecognitionTranscription, SpeechRecognitionOptions } from "nativescript-speech-recognition";
+import { ChangeDetectorRef } from "@angular/core";
 
 @Component({
     selector: "light-controller",
@@ -12,12 +14,49 @@ export class LightControllerComponent implements OnInit {
     serviceUUID: string = "cc02";
     characteristicUUID: string = "ee03";
     deviceUUID: string = "";
+    transcription = { text: "" };
 
-    constructor(private route: ActivatedRoute) {}
+    constructor(private route: ActivatedRoute, private change: ChangeDetectorRef, private speechRecognition: SpeechRecognition) {}
 
     ngOnInit() {
         this.deviceUUID = this.route.snapshot.params["UUID"];
         this.writeColor("#09CE19");
+        this.speechRecognition.requestPermission().then((granted: boolean) => {
+            console.log("Granted? " + granted);
+        });
+        this.triggerListening();
+    }
+
+    triggerListening() {
+        this.speechRecognition
+            .available()
+            .then(available => {
+                available ? this.listen() : alert("Speech recognition is not available!");
+            })
+            .catch(error => console.error(error));
+    }
+
+    listen() {
+        const options: SpeechRecognitionOptions = {
+            locale: "en-US",
+            onResult: (transcription: SpeechRecognitionTranscription) => {
+                console.log(`Text: ${transcription.text}, Finished: ${transcription.finished}`);
+                this.transcription = transcription;
+                this.change.detectChanges();
+            }
+        };
+
+        this.speechRecognition
+            .startListening(options)
+            .then(() => console.log("Started listening"))
+            .catch(error => console.error(error));
+    }
+
+    stopListening() {
+        this.speechRecognition
+            .stopListening()
+            .then(() => console.log("Stopped listening."))
+            .catch(error => console.error(error));
     }
 
     showRainbow() {
