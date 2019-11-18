@@ -6,13 +6,12 @@ import { AppComponent } from "./app.component";
 import { MipScanComponent } from "./mip-scan/mip-scan.component";
 import { MipControllerComponent } from "./mip-controller/mip-controller.component";
 import { LightControllerComponent } from "./light-controller/light-controller-component";
-import { SpeechRecognition } from "nativescript-speech-recognition";
 
 @NgModule({
     bootstrap: [AppComponent],
     imports: [NativeScriptModule, AppRoutingModule],
     declarations: [AppComponent, MipScanComponent, MipControllerComponent, LightControllerComponent],
-    providers: [SpeechRecognition],
+    providers: [],
     schemas: [NO_ERRORS_SCHEMA]
 })
 export class AppModule {}

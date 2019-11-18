@@ -1,8 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import * as bluetooth from "nativescript-bluetooth";
 import { ActivatedRoute } from "@angular/router";
-import { SpeechRecognition, SpeechRecognitionTranscription, SpeechRecognitionOptions } from "nativescript-speech-recognition";
-import { ChangeDetectorRef } from "@angular/core";
 
 @Component({
     selector: "light-controller",
@@ -16,47 +14,11 @@ export class LightControllerComponent implements OnInit {
     deviceUUID: string = "";
     transcription = { text: "" };
 
-    constructor(private route: ActivatedRoute, private change: ChangeDetectorRef, private speechRecognition: SpeechRecognition) {}
+    constructor(private route: ActivatedRoute) {}
 
     ngOnInit() {
         this.deviceUUID = this.route.snapshot.params["UUID"];
-        this.writeColor("#09CE19");
-        this.speechRecognition.requestPermission().then((granted: boolean) => {
-            console.log("Granted? " + granted);
-        });
-        this.triggerListening();
-    }
-
-    triggerListening() {
-        this.speechRecognition
-            .available()
-            .then(available => {
-                available ? this.listen() : alert("Speech recognition is not available!");
-            })
-            .catch(error => console.error(error));
-    }
-
-    listen() {
-        const options: SpeechRecognitionOptions = {
-            locale: "en-US",
-            onResult: (transcription: SpeechRecognitionTranscription) => {
-                console.log(`Text: ${transcription.text}, Finished: ${transcription.finished}`);
-                this.transcription = transcription;
-                this.change.detectChanges();
-            }
-        };
-
-        this.speechRecognition
-            .startListening(options)
-            .then(() => console.log("Started listening"))
-            .catch(error => console.error(error));
-    }
-
-    stopListening() {
-        this.speechRecognition
-            .stopListening()
-            .then(() => console.log("Stopped listening."))
-            .catch(error => console.error(error));
+        this.writeColor("#000000");
     }
 
     showRainbow() {
@@ -65,20 +27,7 @@ export class LightControllerComponent implements OnInit {
     }
 
     loopColors(index) {
-        const colors = [
-            "#000000",
-            "#ff0000",
-            "#ff8000",
-            "#ffff00",
-            "#80ff00",
-            "#00ff00",
-            "#00ff80",
-            "#00ffff",
-            "#0080ff",
-            "#0000ff",
-            "#8000ff",
-            "#ff0080"
-        ];
+        const colors = ["#000000", "#f23b9e", "#f80d26", "#f88021", "#700a83", "#fae722", "#253698", "#1a85bd", "#1d9730"];
 
         if (index < colors.length) {
             setTimeout(() => {
@@ -110,5 +59,21 @@ export class LightControllerComponent implements OnInit {
     rgbToHex(red, green, blue) {
         var rgb = blue | (green << 8) | (red << 16);
         return "#" + (0x1000000 + rgb).toString(16).slice(1);
+    }
+
+    disconnect() {
+        bluetooth
+            .disconnect({
+                UUID: this.deviceUUID
+            })
+            .then(
+                function() {
+                    console.log("disconnected successfully");
+                },
+                function(err) {
+                    // in this case you're probably best off treating this as a disconnected peripheral though
+                    console.log("disconnection error: " + err);
+                }
+            );
     }
 }

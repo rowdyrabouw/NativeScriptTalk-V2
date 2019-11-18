@@ -1,3 +1,32 @@
-.mip-controller {
+.action-bar {
+  background-color: black;
+  border-width: 1;
+  border-color: black;
+  color: black;
+}
 
+.button-rounded {
+  border-radius: 55;
+  height: 110;
+  width: 110;
+  border-width: 15;
+  color: white;
+  font-size: 40;
+  background-color: #f0c64c;
+  border-color: #edb007;
+  font-weight: bold;
+}
+
+.button-a {
+  background-color: #f22646;
+  border-color: #bd3541;
+}
+
+.page {
+  background-color: black;
+}
+
+.button-disconnect {
+  background-color: #f22646;
+  border-color: #bd3541;
 }

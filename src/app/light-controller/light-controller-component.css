@@ -1,2 +1,79 @@
-.light-controller {
+.action-bar {
+  background-color: black;
+  border-width: 1;
+  border-color: black;
+  color: black;
+}
+
+.page {
+  background-color: black;
+}
+
+.button-rounded {
+  border-radius: 40;
+  height: 80;
+  width: 80;
+  color: white;
+  border-width: 1;
+  border-color: white;
+  font-size: 40;
+  background-color: #f0c64c;
+  font-weight: bold;
+}
+
+.b1 {
+  background-color: #f23b9e;
+}
+
+.b2 {
+  background-color: #f80d26;
+  margin-bottom: 80;
+}
+
+.b3 {
+  background-color: #f88021;
+}
+
+.b4 {
+  background-color: #700a83;
+  margin-top: -50;
+  margin-left: 40;
+}
+
+.b5 {
+  background-color: #ffffff;
+  margin-top: -50;
+}
+
+.b6 {
+  background-color: #fae722;
+  margin-top: -50;
+  margin-right: 40;
+}
+
+.b7 {
+  background-color: #253698;
+  margin-top: -50;
+}
+
+.b8 {
+  background-color: #1a85bd;
+  margin-top: 40;
+}
+
+.b9 {
+  background-color: #1d9730;
+  margin-top: -50;
+}
+
+.button-rounded-big {
+  border-radius: 50;
+  height: 100;
+  width: 100;
+  border-width: 5;
+}
+
+.button-disconnect {
+  background-color: #f22646;
+  border-color: #bd3541;
 }

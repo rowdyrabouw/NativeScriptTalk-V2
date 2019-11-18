@@ -76,14 +76,26 @@ export class MipScanComponent implements OnInit {
         });
     }
 
-    connect(UUID: string) {
+    connectMip(UUID: string) {
+        // this.router.navigate(["mipcontroller", UUID]);
         bluetooth.connect({
             UUID: UUID,
             onConnected: (peripheral: Peripheral) => {
                 console.log("Connected");
-                // console.log(UUID);
-                // console.log(peripheral.UUID);
-                // this.router.navigate(['mipcontroller', UUID]);
+                this.router.navigate(["mipcontroller", UUID]);
+            },
+            onDisconnected: (peripheral: Peripheral) => {
+                this.router.navigate(["mipscan"]);
+            }
+        });
+    }
+
+    connectLight(UUID: string) {
+        // this.router.navigate(["lightcontroller", UUID]);
+        bluetooth.connect({
+            UUID: UUID,
+            onConnected: (peripheral: Peripheral) => {
+                console.log("Connected");
                 this.router.navigate(["lightcontroller", UUID]);
             },
             onDisconnected: (peripheral: Peripheral) => {

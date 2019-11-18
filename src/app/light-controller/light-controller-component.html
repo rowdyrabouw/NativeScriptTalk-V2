@@ -1,13 +1,19 @@
 <ActionBar title="Light Controller" class="action-bar"> </ActionBar>
 
-<StackLayout class="page">
-  <label [text]="'UUID:' + deviceUUID" class="h2 text-primary text-center"></label>
+<FlexboxLayout justifyContent="center" alignItems="center" class="page" flexDirection="column">
+  <GridLayout columns="80, 80, 80, 80, 80" rows="auto, auto, auto">
+    <button row="0" col="1" text="" (tap)="writeColor('#f23b9e')" class="button-rounded b1"></button>
+    <button row="0" col="2" text="" (tap)="writeColor('#f80d26')" class="button-rounded b2"></button>
+    <button row="0" col="3" text="" (tap)="writeColor('#f88021')" class="button-rounded b3"></button>
+    <button row="1" col="0" text="" (tap)="writeColor('#700a83')" class="button-rounded b4"></button>
+    <button row="1" col="2" text="" (tap)="showRainbow()" class="button-rounded b5"></button>
+    <button row="1" col="4" text="" (tap)="writeColor('#fae722')" class="button-rounded b6"></button>
+    <button row="2" col="1" text="" (tap)="writeColor('#253698')" class="button-rounded b7"></button>
+    <button row="2" col="2" text="" (tap)="writeColor('#1a85bd')" class="button-rounded b8"></button>
+    <button row="2" col="3" text="" (tap)="writeColor('#1d9730')" class="button-rounded b9"></button>
+  </GridLayout>
 
-  <button text="Rainbow" (tap)="showRainbow()"></button>
-
-  <StackLayout>
-    <label [text]="transcription.text"></label>
-    <button (tap)="triggerListening()" text="Start Listening"></button>
-    <button (tap)="stopListening()" text="Stop Listening"></button>
+  <StackLayout style="margin-top: 100;">
+    <button (tap)="disconnect()" text="" class="button-rounded button-rounded-big button-disconnect"></button>
   </StackLayout>
-</StackLayout>
+</FlexboxLayout>

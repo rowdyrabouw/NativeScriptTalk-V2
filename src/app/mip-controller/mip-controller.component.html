@@ -1,38 +1,15 @@
-<ActionBar title="Mip Controller" class="action-bar">
-</ActionBar>
+<ActionBar title="Mip Controller" class="action-bar"> </ActionBar>
 
-<StackLayout class="page">
-  <Label [text]="'UUID:' + deviceUUID" class="h2 text-primary text-center"></Label>
-  
-  <DockLayout>
-    
-    <Button dock="top" text="Move Forward" (tap)="moveForward()" class="btn btn-primary" width="40%"></Button>
-    <Button dock="bottom" text="Move Back" (tap)="moveBack()" class="btn btn-primary" width="40%"></Button>
+<FlexboxLayout justifyContent="center" alignItems="center" class="page" flexDirection="column">
+  <GridLayout columns="auto, 150, auto" rows="auto, 150, auto">
+    <button row="0" col="1" text="F" (tap)="moveForward()" class="button-rounded"></button>
+    <button row="1" col="0" text="L" (tap)="turnLeft()" class="button-rounded"></button>
+    <button row="1" col="1" text="A" (tap)="checkAccelerometer()" class="button-rounded button-a"></button>
+    <button row="1" col="2" text="R" (tap)="turnRight()" class="button-rounded"></button>
+    <button row="2" col="1" text="B" (tap)="moveBack()" class="button-rounded"></button>
+  </GridLayout>
 
-    <Button dock="left" text="Turn Left" (tap)="turnLeft()" class="btn btn-primary" width="40%"></Button>  
-    <Button dock="right" text="Turn Right" (tap)="turnRight()" class="btn btn-primary" width="40%"></Button>
-  </DockLayout>
-
-  <Button *ngIf="!loopHandle"
-    text="Start Accelerometer (interval)"
-    (tap)="startAccelerometerInterval()"
-    class="btn btn-primary btn-lime" width="80%">
-  </Button>
-  <Button *ngIf="loopHandle"
-    text="Stop Accelerometer (interval)"
-    (tap)="stopAccelerometerInterval()" 
-    class="btn btn-primary btn-round-lg btn-ruby" width="80%">
-  </Button>
-
-  <Button *ngIf="!accelerometerSubscription.closed"
-    text="Stop Accelerometer (rxjs)"
-    (tap)="stopAccelerometerRxjs()" 
-    class="btn btn-primary btn-round-lg btn-ruby" width="80%">
-  </Button>
-  <Button *ngIf="accelerometerSubscription.closed"
-    text="Start Accelerometer (rxjs)"
-    (tap)="startAccelerometerRxjs()"
-    class="btn btn-primary btn-lime" width="80%">
-  </Button>
-
-</StackLayout>
+  <StackLayout style="margin-top: 100;">
+    <button (tap)="disconnect()" text="" class="button-rounded button-rounded-big button-disconnect"></button>
+  </StackLayout>
+</FlexboxLayout>
