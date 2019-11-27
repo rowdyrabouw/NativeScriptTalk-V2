@@ -1,1 +1,1 @@
-# nativescript-mip-simple-ng
+Demo app with 2 Bluetooth devices (MIP robot, Lightbulb)
