@@ -1,6 +1,19 @@
 <ActionBar class="action-bar"></ActionBar>
 
 <StackLayout class="page">
-  <button text="MIP" (tap)="connectMip('1C:05:21:4C:5E:04')" class="button-rounded button-mip"></button>
-  <button text="LIGHT" (tap)="connectLight('FC:58:FA:C1:76:47')" class="button-rounded button-light"></button>
+  <StackLayout orientation="horizontal" horizontalAlignment="center">
+    <Label text="App version: " textWrap="true"></Label>
+    <Label [text]="version" textWrap="true"></Label>
+  </StackLayout>
+
+  <button
+    text="MIP"
+    (tap)="connectMip('1C:05:21:4C:5E:04')"
+    class="button-rounded button-mip"
+  ></button>
+  <button
+    text="LIGHT"
+    (tap)="connectLight('FC:58:FA:C1:76:47')"
+    class="button-rounded button-light"
+  ></button>
 </StackLayout>

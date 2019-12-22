@@ -1,0 +1,12 @@
+{
+  "name": "nativescript-version-number",
+  "version": "1.0.0",
+  "main": "version-number",
+  "typings": "version-number.d.ts",
+  "nativescript": {
+    "platforms": {
+      "android": "5.0.0",
+      "ios": "5.0.0"
+    }
+  }
+}

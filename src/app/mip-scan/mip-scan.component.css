@@ -32,3 +32,9 @@
 .page {
   background-color: black;
 }
+
+label {
+  color: white;
+  font-size: 20;
+  font-weight: bold;
+}

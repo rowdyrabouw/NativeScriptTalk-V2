@@ -18,6 +18,10 @@
             ]
         }
     },
+    "files": [
+        "nativescript-version-number/version-number.ts",
+        "src/main.ts"
+    ],
     "exclude": [
         "node_modules",
         "platforms"

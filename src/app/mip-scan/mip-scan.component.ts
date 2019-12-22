@@ -4,6 +4,7 @@ import { Peripheral } from "nativescript-bluetooth";
 import { Router } from "@angular/router";
 import { Observable, Subscription } from "rxjs";
 import { distinctUntilChanged } from "rxjs/operators";
+import { VersionNumber } from "nativescript-version-number";
 
 @Component({
     selector: "mip-scan",
@@ -12,6 +13,8 @@ import { distinctUntilChanged } from "rxjs/operators";
     styleUrls: ["./mip-scan.component.css"]
 })
 export class MipScanComponent implements OnInit {
+    version = new VersionNumber().getVersion();
+
     isEnabledSubscription: Subscription;
     isBluetoothEnabled = false;
 
@@ -34,18 +37,26 @@ export class MipScanComponent implements OnInit {
         // bluetooth.requestCoarseLocationPermission();
         // if no permission was granted previously this will open a user consent screen
         bluetooth.requestCoarseLocationPermission().then(function(granted) {
-            console.log("Location permission requested, user granted? " + granted);
+            console.log(
+                "Location permission requested, user granted? " + granted
+            );
         });
 
-        this.isEnabledSubscription = this.listenToBluetoothEnabled().subscribe(enabled => (this.isBluetoothEnabled = enabled));
+        this.isEnabledSubscription = this.listenToBluetoothEnabled().subscribe(
+            enabled => (this.isBluetoothEnabled = enabled)
+        );
     }
 
     public listenToBluetoothEnabled(): Observable<boolean> {
         return new Observable<boolean>(observer => {
-            bluetooth.isBluetoothEnabled().then(enabled => observer.next(enabled));
+            bluetooth
+                .isBluetoothEnabled()
+                .then(enabled => observer.next(enabled));
 
             let intervalHandle = setInterval(() => {
-                bluetooth.isBluetoothEnabled().then(enabled => observer.next(enabled));
+                bluetooth
+                    .isBluetoothEnabled()
+                    .then(enabled => observer.next(enabled));
             }, 1000);
 
             // stop checking every second on unsubscribe
